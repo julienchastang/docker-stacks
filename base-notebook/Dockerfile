@@ -22,6 +22,7 @@ RUN apt-get update && apt-get -yq dist-upgrade \
     bzip2 \
     ca-certificates \
     sudo \
+    git \
     locales \
     fonts-liberation \
  && rm -rf /var/lib/apt/lists/*
@@ -110,6 +111,10 @@ RUN conda install --quiet --yes \
     rm -rf /home/$NB_USER/.cache/yarn && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
+
+COPY jupyterhub-local.sh /tmp
+
+RUN bash /tmp/jupyterhub-local.sh
 
 USER root
 
